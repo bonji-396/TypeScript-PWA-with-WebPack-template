@@ -39,16 +39,31 @@ timer$.subscribe({
 // PWAのメイン処理
 console.log('PWA application started');
 
-
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker
+  const swNavigator = navigator as Navigator & {
+    serviceWorker: ServiceWorkerContainer;
+  };
+
+  const registerSW = () => {
+    swNavigator.serviceWorker
       .register('/service-worker.js')
-      .then((registration) => {
+      .then((registration: ServiceWorkerRegistration) => {
         console.log('Service Worker registered:', registration);
       })
-      .catch((error) => {
+      .catch((error: unknown) => {
         console.error('Service Worker registration failed:', error);
       });
-  });
+  };
+
+  registerSW();
+
+  if (import.meta.webpackHot) {
+    import.meta.webpackHot.accept('./service-worker.ts', () => {
+      console.log('[HMR] Reloading Service Worker...');
+      swNavigator.serviceWorker.getRegistrations().then((registrations) => {
+        registrations.forEach((registration) => registration.unregister());
+        registerSW();
+      });
+    });
+  }
 }

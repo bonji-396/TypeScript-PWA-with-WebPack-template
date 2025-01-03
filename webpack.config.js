@@ -10,6 +10,9 @@ module.exports = {
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '/',
+    hotUpdateChunkFilename: '[id].[fullhash].hot-update.js',
+    hotUpdateMainFilename: '[runtime].[fullhash].hot-update.json',
   },
   module: {
     rules: [
@@ -26,7 +29,7 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
-              implementation: require('sass'), // Dart Sass を使用
+              implementation: require('sass'),
             },
           },
         ],
@@ -42,6 +45,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'public', 'index.html'),
+      inject: true,
     }),
   ],
   devServer: {
@@ -55,9 +59,8 @@ module.exports = {
     ],
     port: 8080,
     hot: true,
-    headers: {
-      'Content-Security-Policy': "script-src 'self' 'unsafe-eval'; object-src 'self'",
-    },
+    liveReload: false,
+    watchFiles: ['src/**/*', 'public/**/*'],
   },
   mode: 'development',
   devtool: 'inline-source-map',
