@@ -1,6 +1,6 @@
 # WebPack で TypeScript + PWA のテンプレート
 
-WebPackとWorkBoxを利用して、TypeScriptでPWAのフロントエンドアプリを作るためのテンプレートです。
+WebPackを利用して、TypeScriptでPWAのフロントエンドアプリを作るためのテンプレートです。
 
 ## 主な技術構成
 - Node.js
@@ -50,8 +50,7 @@ npm install
 |webpack|モジュールバンドラー。複数のファイルを1つにまとめ、最適化する|
 |webpack-cli|webpackをコマンドラインで使用するためのツール|
 |webpack-dev-server|開発用のローカルサーバー。ホットリロードなどの開発支援機能を提供|
-|copy-webpack-plugin|静的ファイルを出力ディレクトリにコピーするwebpackプラグイン|
-|workbox-webpack-plugin|PWAのService Worker生成を自動化するGoogleのWorkboxツールとwebpackの連携プラグイン|
+webpackの連携プラグイン|
 |rimraf|Node.jsで`rm -rf`コマンドと同等の機能を提供するツール。ビルド前のdistディレクトリのクリーンアップなどに使用します。|
 
 
