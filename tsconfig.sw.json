@@ -1,0 +1,8 @@
+// tsconfig.sw.json
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "lib": ["webworker", "es2020"],
+    "types": []
+  }
+}
